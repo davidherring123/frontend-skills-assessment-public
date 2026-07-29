@@ -1,0 +1,29 @@
+{
+  "name": "@assessment/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Transactions dashboard for the InterPayments frontend skills assessment",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.5.1",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "antd": "^5.26.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.4.5",
+    "vite": "^5.4.11",
+    "vitest": "^1.6.0"
+  }
+}

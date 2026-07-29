@@ -1,0 +1,27 @@
+{
+  "name": "frontend-skills-assessment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "InterPayments frontend skills assessment",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev -w @assessment/api\" \"npm run dev -w @assessment/web\"",
+    "build": "npm run build -w @assessment/web",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "eslint \"apps/**/src/**/*.{ts,tsx}\""
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "concurrently": "^9.1.2",
+    "eslint": "^8.57.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "typescript": "^5.4.5"
+  }
+}
