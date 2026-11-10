@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react"
+import type { TransactionListQuery } from "../models/transaction"
+import {
+  createTransaction,
+  fetchTransaction,
+  fetchTransactionSummary,
+  fetchTransactions,
+} from "../services/transaction-service"
+import { useApiMutation } from "./useApiMutation"
+import { useApiQuery } from "./useApiQuery"
 
-import type { Transaction } from "../models/transaction"
-import { fetchTransactions } from "../services/transaction-service"
+export const useTransactions = ({ page, pageSize, search }: TransactionListQuery) =>
+  useApiQuery(JSON.stringify(["transactions", page, pageSize, search ?? ""]), (signal) =>
+    fetchTransactions({ page, pageSize, search }, signal),
+  )
 
-export const useTransactions = () => {
-  const [transactions, setTransactions] = useState<Transaction[]>([])
-  const [loading, setLoading] = useState(true)
+export const useTransactionSummary = (search?: string) =>
+  useApiQuery(JSON.stringify(["summary", search ?? ""]), (signal) => fetchTransactionSummary(search, signal))
 
-  useEffect(() => {
-    fetchTransactions().then((data) => {
-      setTransactions(data)
-      setLoading(false)
-    })
-  }, [])
+export const useTransaction = (id: string) =>
+  useApiQuery(JSON.stringify(["transaction", id]), (signal) => fetchTransaction(id, signal))
 
-  return { transactions, loading }
-}
+export const useCreateTransaction = () => useApiMutation(createTransaction)

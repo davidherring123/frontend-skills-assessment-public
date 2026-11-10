@@ -1,3 +1,5 @@
+import type { PaginatedResponse, PaginationQuery } from "./pagination"
+
 export enum CardBrand {
   VISA = "VISA",
   MASTERCARD = "MASTERCARD",
@@ -10,6 +12,7 @@ export enum TransactionStatus {
   DECLINED = "DECLINED",
   REFUNDED = "REFUNDED",
   PENDING = "PENDING",
+  VOIDED = "VOIDED",
 }
 
 export interface Transaction {
@@ -22,4 +25,16 @@ export interface Transaction {
   total: number
   status: TransactionStatus
   createdAt: string
+}
+
+export interface TransactionListQuery extends PaginationQuery {
+  search?: string
+}
+
+export type TransactionListResponse = PaginatedResponse<Transaction>
+
+export interface TransactionSummary {
+  count: number
+  totalProcessed: number
+  totalSurcharge: number
 }

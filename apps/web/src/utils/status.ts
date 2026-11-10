@@ -9,6 +9,7 @@ export const statusTagColor = (status: TransactionStatus): string => {
     case TransactionStatus.PENDING:
       return "warning"
     case TransactionStatus.REFUNDED:
+    case TransactionStatus.VOIDED:
       return "default"
   }
 }

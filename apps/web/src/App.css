@@ -32,6 +32,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 48px; /* keeps the header the same height when the button is hidden */
   margin-bottom: 24px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
@@ -44,16 +45,51 @@ body {
   text-decoration: none;
 }
 
+.page-toolbar {
+  margin-bottom: 16px;
+}
+
+.panel {
+  margin: 0 auto;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
 .new-transaction {
-  max-width: 480px;
+  max-width: 520px;
+}
+
+.transaction-detail {
+  max-width: 640px;
+}
+
+.transaction-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.transaction-detail-header h3.ant-typography {
+  margin: 0 0 4px;
 }
 
 .new-transaction h2 {
   margin-top: 0;
+  font-size: 22px;
 }
 
-.form-field {
-  margin-bottom: 12px;
+.charge-preview {
+  margin-bottom: 24px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .app-header {
@@ -113,6 +149,20 @@ body {
 
 .transaction-header:hover {
   background: #fafbfc;
+}
+
+.transaction-list-empty {
+  padding: 48px 16px;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.page-alert {
+  margin-bottom: 16px;
 }
 
 .mono {

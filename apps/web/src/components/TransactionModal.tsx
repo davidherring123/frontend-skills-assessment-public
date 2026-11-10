@@ -1,7 +1,9 @@
 import { Button, Descriptions, Modal, Tag } from "antd"
+import { useLocation, useNavigate } from "react-router-dom"
 
+import type { DashboardLinkState } from "../hooks/useDashboardPath"
 import type { Transaction } from "../models/transaction"
-import { formatCurrency, formatDate } from "../utils/format"
+import { formatCurrency, formatDate, formatPercent } from "../utils/format"
 import { statusTagColor } from "../utils/status"
 
 interface TransactionModalProps {
@@ -10,12 +12,24 @@ interface TransactionModalProps {
 }
 
 export const TransactionModal = ({ transaction, onClose }: TransactionModalProps) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const openDetails = () => {
+    if (!transaction) return
+    const state: DashboardLinkState = { from: location.search }
+    navigate(`/transactions/${encodeURIComponent(transaction.id)}`, { state })
+  }
+
   return (
     <Modal
       open={transaction !== null}
       title={transaction?.id}
       onCancel={onClose}
       footer={[
+        <Button key="details" onClick={openDetails}>
+          View full details
+        </Button>,
         <Button key="close" type="primary" onClick={onClose}>
           Close
         </Button>,
@@ -33,7 +47,7 @@ export const TransactionModal = ({ transaction, onClose }: TransactionModalProps
             {
               key: "surcharge",
               label: "Surcharge",
-              children: `${formatCurrency(transaction.surcharge)} (${(transaction.surchargeRate * 100).toFixed(1)}%)`,
+              children: `${formatCurrency(transaction.surcharge)} (${formatPercent(transaction.surchargeRate)})`,
             },
             { key: "total", label: "Total", children: formatCurrency(transaction.total) },
             {

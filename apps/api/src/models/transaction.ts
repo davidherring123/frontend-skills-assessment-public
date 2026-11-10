@@ -1,3 +1,5 @@
+import type { PaginatedResponse, PaginationQuery } from "./pagination.js"
+
 export enum CardBrand {
   VISA = "VISA",
   MASTERCARD = "MASTERCARD",
@@ -10,6 +12,7 @@ export enum TransactionStatus {
   DECLINED = "DECLINED",
   REFUNDED = "REFUNDED",
   PENDING = "PENDING",
+  VOIDED = "VOIDED", // this was missing from the original List
 }
 
 export interface Transaction {
@@ -23,3 +26,9 @@ export interface Transaction {
   status: TransactionStatus
   createdAt: string
 }
+
+export interface TransactionListQuery extends PaginationQuery {
+  search?: string
+}
+
+export type TransactionListResponse = PaginatedResponse<Transaction>
